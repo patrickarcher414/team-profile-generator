@@ -3,7 +3,8 @@
     "jest": "^28.0.3"
   },
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "inquirer": "^8.2.4",
+    "inquirer-loop": "^0.3.0"
   },
   "name": "team-profile-generator",
   "version": "1.0.0",

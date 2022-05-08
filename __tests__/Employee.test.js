@@ -1,7 +1,10 @@
 // Import data from Employee.js
 const Employee = require("../lib/Employee");
 // Instantiate new Employee Object
-const Employee = new Employee();
+test("should instantiate a new employee", () => {
+  let employee = new Employee();
+  expect(typeof employee).toBe("object");
+});
 
 // test employee constructor
 test("creates a new Employee object", (req, res) => {
