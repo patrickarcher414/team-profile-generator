@@ -2,10 +2,10 @@ const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
 const Manager = require("./lib/Manager.js");
 const inquirer = require("inquirer");
-const genFile = require("../src/genFile");
+const genFile = require("./src/genFile");
 const fs = require("fs");
 
-let team = [];
+const team = [];
 
 // prompt info about new Employee
 function newEmployee() {
@@ -30,16 +30,15 @@ function newEmployee() {
       {
         name: "id",
         type: "number",
-        askAnswered: "true",
         message: "Enter employee's id number.",
       },
     ])
-    .then((data) => {
-      if (data.role === "Manager") {
+    .then((res) => {
+      if (res.role === "Manager") {
         promptManager();
-      } else if (data.role === "Intern") {
+      } else if (res.role === "Intern") {
         promptIntern();
-      } else if (data.role === "Engineer") {
+      } else if (res.role === "Engineer") {
         promptEngineer();
       }
     });
@@ -52,11 +51,11 @@ function addEmployee() {
       type: "confirm",
       message: "Would you like to add another employee?",
     })
-    .then((data) => {
-      if (data.loop === true) {
+    .then((res) => {
+      if (res.loop === true) {
         newEmployee();
       } else {
-        templateHTML(team);
+        genFile(team);
       }
     });
 }
@@ -68,12 +67,12 @@ function promptManager() {
       type: "number",
       message: "What is Managers office number?",
     })
-    .then((data) => {
+    .then((res) => {
       const manager = new Manager(
-        data.name,
-        data.id,
-        data.email,
-        data.officeNumber
+        res.name,
+        res.id,
+        res.email,
+        res.officeNumber
       );
       team.push(manager);
       addEmployee();
@@ -87,8 +86,8 @@ function promptIntern() {
       type: "input",
       message: "What is the name of Interns school?",
     })
-    .then((data) => {
-      const intern = new Intern(data.name, data.id, data.email, data.school);
+    .then((res) => {
+      const intern = new Intern(res.name, res.id, res.email, res.school);
       team.push(intern);
       addEmployee();
     });
@@ -101,13 +100,8 @@ function promptEngineer() {
       type: "input",
       message: "Enter URL to Engineer's GitHub.",
     })
-    .then((data) => {
-      const engineer = new Engineer(
-        data.name,
-        data.id,
-        data.email,
-        data.github
-      );
+    .then((res) => {
+      const engineer = new Engineer(res.name, res.id, res.email, res.github);
       team.push(engineer);
       addEmployee();
     });

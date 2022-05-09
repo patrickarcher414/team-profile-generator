@@ -26,19 +26,19 @@ function templateHTML(team) {
 }
 
 function genCards(team) {
-  const employees = team.map((employee) => {
-    switch (employee.getRole()) {
+  const employees = team.map((emp) => {
+    switch (emp.getRole()) {
       case "Manager":
         return `
           <section>
             <div>
-              <h2>${employee.getName()}</h2>
+              <h2>${emp.getName()}</h2>
               <p>Manager</p>
             </div>
             <div>
-              <p>ID: ${employee.getId()}</p>
-              <p>Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
-              <p>Office Number: ${employee.getOfficeNumber()}</p>
+              <p>ID: ${emp.getId()}</p>
+              <p>Email: <a href="mailto:${emp.getEmail()}">${emp.getEmail()}</a></p>
+              <p>Office Number: ${emp.getOfficeNumber()}</p>
             </div>
           </section>
         `;
@@ -46,15 +46,15 @@ function genCards(team) {
         return `
         <section>
           <div>
-            <h2>${employee.getName()}</h2>
+            <h2>${emp.getName()}</h2>
             <p>Engineer</p>
           </div>
           <div>
-            <p>ID: ${employee.getId()}</p>
-            <p>Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
+            <p>ID: ${emp.getId()}</p>
+            <p>Email: <a href="mailto:${emp.getEmail()}">${emp.getEmail()}</a></p>
             <p>Github:<a href="https://github.com/${
-              employee.github
-            }" target='_blank'>${employee.geGithub()}</a></p>
+              emp.github
+            }" target='_blank'>${emp.geGithub()}</a></p>
           </div>
         </section>
       `;
@@ -62,13 +62,13 @@ function genCards(team) {
         return `
         <section>
           <div>
-            <h2>${employee.getName()}</h2>
+            <h2>${emp.getName()}</h2>
             <p>Intern</p>
           </div>
           <div>
-            <p>ID: ${employee.getId()}</p>
-            <p>Email: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></p>
-            <p>School: ${employee.getSchool()}</p>
+            <p>ID: ${emp.getId()}</p>
+            <p>Email: <a href="mailto:${emp.getEmail()}">${emp.getEmail()}</a></p>
+            <p>School: ${emp.getSchool()}</p>
           </div>
         </section>
       `;
@@ -77,11 +77,11 @@ function genCards(team) {
   return employees.join("");
 }
 
-const genFile = (team) => {
+function genFile(team) {
   fs.writeFile("./dist/team-profile.html", templateHTML(team), (err) => {
     if (err) throw err;
     console.log("File created.");
   });
-};
+}
 
 module.exports = genFile;
