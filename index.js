@@ -100,7 +100,7 @@ function promptEngineer(data) {
     .prompt({
       name: "github",
       type: "input",
-      message: "Enter URL to Engineer's GitHub.",
+      message: "Enter profile name of Engineer's GitHub.",
     })
     .then((res) => {
       const engineer = new Engineer(data.name, data.id, data.email, res.github);
