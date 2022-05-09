@@ -55,7 +55,7 @@ function genCards(team) {
             <p>Email: <a href="mailto:${emp.getEmail()}">${emp.getEmail()}</a></p>
             <p>Github:<a href="https://github.com/${
               emp.github
-            }" target='_blank'>${emp.geGithub()}</a></p>
+            }" target='_blank'>${emp.getGithub()}</a></p>
           </div>
         </section>
       `;
