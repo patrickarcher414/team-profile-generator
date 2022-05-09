@@ -69,7 +69,6 @@ function promptManager(data) {
       message: "What is Managers office number?",
     })
     .then((res) => {
-      console.log(res);
       const manager = new Manager(
         data.name,
         data.id,
