@@ -26,6 +26,7 @@ function templateHTML(team) {
 }
 
 function genCards(team) {
+  console.log(team);
   const employees = team.map((emp) => {
     switch (emp.getRole()) {
       case "Manager":

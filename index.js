@@ -1,3 +1,4 @@
+const Employee = require("./lib/Employee.js");
 const Engineer = require("./lib/Engineer.js");
 const Intern = require("./lib/Intern.js");
 const Manager = require("./lib/Manager.js");
@@ -35,11 +36,11 @@ function newEmployee() {
     ])
     .then((res) => {
       if (res.role === "Manager") {
-        promptManager();
+        promptManager(res);
       } else if (res.role === "Intern") {
-        promptIntern();
+        promptIntern(res);
       } else if (res.role === "Engineer") {
-        promptEngineer();
+        promptEngineer(res);
       }
     });
 }
@@ -60,7 +61,7 @@ function addEmployee() {
     });
 }
 
-function promptManager() {
+function promptManager(data) {
   inquirer
     .prompt({
       name: "officeNumber",
@@ -68,10 +69,11 @@ function promptManager() {
       message: "What is Managers office number?",
     })
     .then((res) => {
+      console.log(res);
       const manager = new Manager(
-        res.name,
-        res.id,
-        res.email,
+        data.name,
+        data.id,
+        data.email,
         res.officeNumber
       );
       team.push(manager);
@@ -79,7 +81,7 @@ function promptManager() {
     });
 }
 
-function promptIntern() {
+function promptIntern(data) {
   inquirer
     .prompt({
       name: "school",
@@ -87,13 +89,13 @@ function promptIntern() {
       message: "What is the name of Interns school?",
     })
     .then((res) => {
-      const intern = new Intern(res.name, res.id, res.email, res.school);
+      const intern = new Intern(data.name, data.id, data.email, res.school);
       team.push(intern);
       addEmployee();
     });
 }
 
-function promptEngineer() {
+function promptEngineer(data) {
   inquirer
     .prompt({
       name: "github",
@@ -101,7 +103,7 @@ function promptEngineer() {
       message: "Enter URL to Engineer's GitHub.",
     })
     .then((res) => {
-      const engineer = new Engineer(res.name, res.id, res.email, res.github);
+      const engineer = new Engineer(data.name, data.id, data.email, res.github);
       team.push(engineer);
       addEmployee();
     });
